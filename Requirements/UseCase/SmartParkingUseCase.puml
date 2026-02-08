@@ -7,54 +7,56 @@ actor Admin
 
 rectangle "Smart Parking System" {
 
-  '---------------- DRIVER USE CASES ----------------
   Driver -- (Register Vehicle)
-  Driver -- (View Parking Status)
   Driver -- (Park Vehicle)
   Driver -- (Exit Vehicle)
   Driver -- (Pay Parking Fee)
-  Driver -- (Receive Ticket)
 
-  '---------------- PARK VEHICLE FLOW ----------------
-  (Park Vehicle) --> (Validate Vehicle Type)
-  (Park Vehicle) --> (Find Available Slot)
-  (Find Available Slot) --> (Check Slot Compatibility)
-  (Park Vehicle) --> (Assign Slot)
-  (Assign Slot) --> (Generate Ticket)
-  (Generate Ticket) --> (Record Entry Time)
-  (Generate Ticket) --> (Store Ticket)
-
-  (Park Vehicle) ..> (Receive Ticket) : <<include>>
-
-  '---------------- EXIT VEHICLE FLOW ----------------
-  (Exit Vehicle) --> (Validate Ticket ID)
-  (Exit Vehicle) --> (Calculate Parking Duration)
-  (Calculate Parking Duration) --> (Apply Pricing Strategy)
-  (Apply Pricing Strategy) --> (Compute Fee)
-  (Exit Vehicle) --> (Release Parking Slot)
-  (Exit Vehicle) ..> (Pay Parking Fee) : <<include>>
-
-  '---------------- PRICING ----------------
-  (Apply Pricing Strategy) <|-- (Standard Pricing)
-  (Apply Pricing Strategy) <|-- (Peak Hour Pricing)
-
-  '---------------- ADMIN USE CASES ----------------
-  Admin -- (Configure Parking Floors)
-  Admin -- (Configure Parking Slots)
-  Admin -- (Manage Vehicle Slot Types)
-  Admin -- (Set Pricing Strategy)
-  Admin -- (Switch to Peak Pricing)
+  Admin -- (Manage Parking Configuration)
   Admin -- (Monitor Parking Lot)
-  Admin -- (View Analytics Report)
-  Admin -- (Maintain Parking Lot)
-
-  '---------------- ANALYTICS ----------------
-  (View Analytics Report) --> (Check Occupancy Status)
-  (Check Occupancy Status) --> (Generate Usage Summary)
-
-  '---------------- SYSTEM AUTOMATION ----------------
-  (Store Ticket) ..> (Ticket Database) : <<include>>
-  (Monitor Parking Lot) ..> (Check Slot Availability) : <<include>>
 
 }
+
+note right of Driver
+The Driver is the primary actor who uses the Smart Parking System
+to register their vehicle, park in an available slot, exit the
+parking area, and complete payment for parking usage.
+end note
+
+note right of Admin
+The Admin is a secondary actor responsible for configuring parking
+infrastructure, managing pricing policies, and monitoring overall
+parking lot operations and availability.
+end note
+
+note bottom of (Register Vehicle)
+This use case allows the driver to register their vehicle details
+with the system so that parking allocation and ticket generation
+can be handled accurately.
+end note
+
+note bottom of (Park Vehicle)
+This use case enables the system to allocate an appropriate parking
+slot to the driver and generate a parking ticket upon vehicle entry.
+end note
+
+note bottom of (Exit Vehicle)
+This use case handles vehicle exit by validating the parking ticket,
+calculating parking duration, and releasing the occupied slot.
+end note
+
+note bottom of (Pay Parking Fee)
+This use case allows the driver to pay the calculated parking fee
+based on duration and pricing strategy before exiting the lot.
+end note
+
+note bottom of (Manage Parking Configuration)
+This use case allows the admin to configure parking floors, slots,
+vehicle types, and pricing strategies for system operation.
+end note
+
+note bottom of (Monitor Parking Lot)
+This use case enables the admin to monitor real-time parking
+occupancy and view operational status of the parking lot.
+end note
 @enduml
