@@ -1,0 +1,17 @@
+@startuml
+title sd robustness_diagram_manage_parking_configuration
+skinparam linetype ortho
+
+actor "System Administrator" as Admin
+
+boundary "Parking UI" as UI
+control "ParkingController" as PC
+entity "ParkingSlot" as PS
+entity "TicketDatabase" as TD
+
+Admin --> UI : modify configuration
+UI --> PC : submit changes
+PC --> PS : update slot rules
+PC --> TD : update pricing rules
+UI <-- PC : show update confirmation
+@enduml
