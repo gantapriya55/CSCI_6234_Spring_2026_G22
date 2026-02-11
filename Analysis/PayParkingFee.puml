@@ -1,0 +1,16 @@
+@startuml
+title sd robustness_diagram_pay_parking_fee
+skinparam linetype ortho
+
+actor "Parking User" as User
+actor "Payment Gateway" as PG
+
+boundary "Parking UI" as UI
+control "TicketController" as TC
+entity "Ticket" as T
+
+User --> UI : pay
+UI --> TC : process payment
+TC --> T : calculate fee
+TC --> PG : authorize
+@enduml
