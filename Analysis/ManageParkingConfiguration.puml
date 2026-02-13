@@ -7,11 +7,18 @@ actor "System Administrator" as Admin
 boundary "Parking UI" as UI
 control "ParkingController" as PC
 entity "ParkingSlot" as PS
-entity "TicketDatabase" as TD
+entity "PricingPolicy" as PP
 
-Admin --> UI : modify configuration
-UI --> PC : submit changes
-PC --> PS : update slot rules
-PC --> TD : update pricing rules
-UI <-- PC : show update confirmation
+Admin -> UI : modify configuration
+UI -> PC : submit changes
+activate PC
+
+PC -> PS : update slot rules
+PS --> PC : slot update status
+
+PC -> PP : update pricing rules
+PP --> PC : pricing update status
+
+PC --> UI : show update confirmation
+deactivate PC
 @enduml
