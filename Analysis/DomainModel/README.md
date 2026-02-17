@@ -4,7 +4,7 @@ must have physical capacity to exist in the system.
 
 The operational flow centers on the Vehicle and its lifecycle. A ParkingSlot maintains a 0..1 relationship with a Vehicle, modeling that a space is 
 either vacant or occupied. Crucially, the Vehicle to Ticket association is defined as 1 to 0... This reflects that a vehicle can exist in the system’s database 
-(e.g., a registered member) before its first parking event (0), while also allowing a "frequent stayer" to be associated with many historical Tickets () over time.
+(e.g., a registered member) before its first parking event (0), while also allowing a frequent parker to have multiple past tickets.
 
 Upon entry, a Vehicle receives a Ticket, which serves as the primary record for timing and financial data. The PricingPolicy is associated with the Ticket to calculate 
 the totalFee based on the duration of stay. The model further defines a 1 to 0..* relationship between Ticket and Payment. This captures the "unpaid" state at entry while 
