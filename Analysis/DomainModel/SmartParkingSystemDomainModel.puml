@@ -1,67 +1,42 @@
 @startuml
 title Smart Parking Management System - Domain Model
-skinparam style strictuml
-skinparam classAttributeIconSize 0
-
-
 
 class ParkingLot {
   lotId : int
   name : String
   location : String
-
 }
-
-
 
 class Floor {
   floorNumber : int
-
 }
-
-
 
 class ParkingSlot {
   slotId : int
   status : String
-
 }
-
-
 
 class Vehicle {
   vehicleNumber : String
   vehicleType : String
-
 }
-
-
 
 class Ticket {
   ticketId : int
   entryTime : DateTime
   exitTime : DateTime
   totalFee : double
-
 }
-
-
 
 class Payment {
   paymentId : int
   paymentMethod : String
   amountPaid : double
-
 }
-
-
 
 class PricingPolicy {
   baseRatePerHour : double
-
 }
-
-
 
 ParkingLot "1" -- "1..*" Floor : contains
 Floor "1" -- "1..*" ParkingSlot : includes
