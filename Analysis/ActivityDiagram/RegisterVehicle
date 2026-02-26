@@ -1,0 +1,54 @@
+@startuml
+title Activity Diagram – Register Vehicle
+
+start
+
+:Register Vehicle;
+note right
+User opens the vehicle registration form.
+end note
+
+:Enter Vehicle Details;
+note right
+User enters license plate number,
+vehicle type, and required details.
+end note
+
+:Submit Registration;
+note right
+User submits the completed
+vehicle registration form.
+end note
+
+:Validate Vehicle Data;
+note right
+System verifies that all required
+vehicle details are valid.
+end note
+
+if (Data Valid?) then (Yes)
+
+  :Save Vehicle Information;
+  note right
+  System stores the vehicle
+  information in the database.
+  end note
+
+  :Show Success Confirmation;
+  note right
+  System displays registration
+  success message to the user.
+  end note
+
+else (No)
+
+  :Display Error Message;
+  note right
+  System shows validation errors
+  and requests correction.
+  end note
+
+endif
+
+stop
+@enduml
