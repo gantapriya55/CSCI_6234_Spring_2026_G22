@@ -1,0 +1,54 @@
+@startuml
+title Activity Diagram – Pay Parking Fee
+
+start
+
+:Initiate Payment;
+note right
+User selects the option
+to pay the parking fee.
+end note
+
+:Retrieve Ticket Details;
+note right
+System retrieves ticket
+information for calculation.
+end note
+
+:Calculate Parking Fee;
+note right
+System calculates fee based on
+duration using pricing policy.
+end note
+
+:Send Payment Request;
+note right
+System sends payment request
+to the Payment Gateway.
+end note
+
+if (Payment Authorized?) then (Yes)
+
+  :Update Payment Status;
+  note right
+  System marks ticket as paid.
+  end note
+
+  :Display Payment Confirmation;
+  note right
+  System shows successful
+  payment confirmation.
+  end note
+
+else (No)
+
+  :Display Payment Failure;
+  note right
+  System informs user that
+  payment was not successful.
+  end note
+
+endif
+
+stop
+@enduml
