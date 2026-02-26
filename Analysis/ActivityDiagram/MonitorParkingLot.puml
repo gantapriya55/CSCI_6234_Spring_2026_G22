@@ -1,0 +1,31 @@
+@startuml
+title Activity Diagram – Monitor Parking Lot
+
+start
+
+:View Parking Dashboard;
+note right
+System Administrator opens
+the parking lot dashboard.
+end note
+
+:Request Slot Data;
+note right
+System requests real-time
+slot occupancy information.
+end note
+
+:Retrieve Occupancy Details;
+note right
+System collects data from
+all parking slots.
+end note
+
+:Display Lot Status;
+note right
+System displays total occupancy,
+available slots, and alerts.
+end note
+
+stop
+@enduml
