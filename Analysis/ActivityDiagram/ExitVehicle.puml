@@ -1,0 +1,44 @@
+@startuml
+title Activity Diagram – Exit Vehicle
+
+start
+
+:Request Exit;
+note right
+User requests to exit
+the parking lot.
+end note
+
+:Check Payment Status;
+note right
+System verifies whether
+parking fee has been paid.
+end note
+
+if (Payment Completed?) then (Yes)
+
+  :Set Slot as Available;
+  note right
+  System updates parking slot
+  status to available.
+  end note
+
+  :Allow Vehicle Exit;
+  note right
+  System allows vehicle
+  to leave the lot.
+  end note
+
+else (No)
+
+  :Display Payment Required Message;
+  note right
+  System informs the user that
+  payment must be completed
+  before exit is allowed.
+  end note
+
+endif
+
+stop
+@enduml
