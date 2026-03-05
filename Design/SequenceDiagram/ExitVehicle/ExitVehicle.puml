@@ -1,0 +1,18 @@
+@startuml
+title Sequence Diagram – Exit Vehicle
+
+actor ParkingUser
+boundary ParkingUI
+control ParkingController
+entity Ticket
+entity ParkingSlot
+
+ParkingUser -> ParkingUI : requestExit()
+ParkingUI -> ParkingController : exitVehicle()
+
+ParkingController -> Ticket : getTicket()
+ParkingController -> ParkingSlot : freeSlot()
+
+ParkingController --> ParkingUI : exitApproved()
+ParkingUI --> ParkingUser : showExitMessage()
+@enduml
