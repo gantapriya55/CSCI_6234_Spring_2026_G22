@@ -5,22 +5,24 @@ actor SystemAdministrator
 boundary ParkingUI
 control ParkingController
 entity ParkingLot
+entity Floor
 entity ParkingSlot
 
 SystemAdministrator -> ParkingUI : viewParkingStatus()
 
 ParkingUI -> ParkingController : getParkingStatus()
 
-ParkingController -> ParkingLot : retrieveSlots()
+ParkingController -> ParkingLot : retrieveFloors()
 
-ParkingLot -> ParkingSlot : checkStatus()
+ParkingLot -> Floor : getSlots()
 
-ParkingSlot --> ParkingLot : slotStatus
+Floor -> ParkingSlot : checkStatus()
 
+ParkingSlot --> Floor : slotStatus
+Floor --> ParkingLot : floorStatus
 ParkingLot --> ParkingController : parkingReport
 
 ParkingController --> ParkingUI : displayParkingStatus()
 
 ParkingUI --> SystemAdministrator : showDashboard()
-
 @enduml
