@@ -1,0 +1,62 @@
+@startuml
+title Smart Parking Management System - Class Diagram
+
+class ParkingLot {
++lotId : int
++name : String
++location : String
++findAvailableSlot()
++retrieveFloors()
++updateParkingSettings()
+}
+
+class Floor {
++floorNumber : int
++getSlots()
+}
+
+class ParkingSlot {
++slotId : int
++status : String
++allocateSlot()
++freeSlot()
++checkStatus()
++updateSlotRules()
+}
+
+class Vehicle {
++vehicleNumber : String
++vehicleType : String
++createVehicle(details)
++saveVehicle()
+}
+
+class Ticket {
++ticketId : int
++entryTime : DateTime
++exitTime : DateTime
++totalFee : double
++generateTicket()
++getTicket()
+}
+
+class Payment {
++paymentId : int
++paymentMethod : String
++amountPaid : double
++recordPayment()
+}
+
+class PricingPolicy {
++baseRatePerHour : double
++calculateFee()
++updatePricing()
+}
+
+ParkingLot "1" -- "1..*" Floor : contains
+Floor "1" -- "1..*" ParkingSlot : includes
+ParkingSlot "1" -- "0..1" Vehicle : occupies
+Vehicle "1" -- "0..*" Ticket : receives
+Ticket "1" -- "0..*" Payment : paidBy
+PricingPolicy "1" -- "0..*" Ticket : calculates
+@enduml
