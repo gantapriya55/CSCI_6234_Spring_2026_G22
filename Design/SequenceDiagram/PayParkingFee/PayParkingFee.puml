@@ -1,0 +1,25 @@
+@startuml
+title Sequence Diagram – Pay Parking Fee
+
+actor ParkingUser
+boundary ParkingUI
+control TicketController
+entity Ticket
+entity PricingPolicy
+entity Payment
+
+ParkingUser -> ParkingUI : payParkingFee()
+
+ParkingUI -> TicketController : requestPayment()
+
+TicketController -> Ticket : getTicket()
+
+TicketController -> PricingPolicy : calculateFee()
+
+TicketController -> Payment : recordPayment()
+
+TicketController --> ParkingUI : paymentSuccess()
+
+ParkingUI --> ParkingUser : displayReceipt()
+
+@enduml
