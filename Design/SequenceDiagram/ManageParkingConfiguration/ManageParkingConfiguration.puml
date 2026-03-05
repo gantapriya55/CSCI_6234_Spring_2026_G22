@@ -1,5 +1,5 @@
 @startuml
-title Sequence Diagram – 
+title Sequence Diagram – Manage Parking Configuration
 
 actor SystemAdministrator
 boundary ParkingUI
