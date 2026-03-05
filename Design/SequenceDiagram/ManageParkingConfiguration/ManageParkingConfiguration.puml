@@ -1,0 +1,28 @@
+@startuml
+title Sequence Diagram – 
+
+actor SystemAdministrator
+boundary ParkingUI
+control ParkingController
+entity ParkingLot
+entity ParkingSlot
+entity PricingPolicy
+
+SystemAdministrator -> ParkingUI : updateConfiguration()
+
+ParkingUI -> ParkingController : submitConfiguration()
+
+ParkingController -> ParkingLot : updateParkingSettings()
+
+ParkingController -> ParkingSlot : updateSlotRules()
+
+ParkingController -> PricingPolicy : updatePricing()
+
+PricingPolicy --> ParkingController : pricingUpdated
+ParkingSlot --> ParkingController : slotsUpdated
+ParkingLot --> ParkingController : configurationUpdated
+
+ParkingController --> ParkingUI : updateSuccess()
+ParkingUI --> SystemAdministrator : displayConfirmation()
+
+@enduml
