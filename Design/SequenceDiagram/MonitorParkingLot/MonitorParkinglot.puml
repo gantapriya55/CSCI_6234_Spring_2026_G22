@@ -1,0 +1,28 @@
+@startuml
+title Sequence Diagram – Monitor Parking Lot
+
+actor SystemAdministrator
+boundary ParkingUI
+control ParkingController
+entity ParkingLot
+entity Floor
+entity ParkingSlot
+
+SystemAdministrator -> ParkingUI : viewParkingStatus()
+
+ParkingUI -> ParkingController : getParkingStatus()
+
+ParkingController -> ParkingLot : retrieveFloors()
+
+ParkingLot -> Floor : getSlots()
+
+Floor -> ParkingSlot : checkStatus()
+
+ParkingSlot --> Floor : slotStatus
+Floor --> ParkingLot : floorStatus
+ParkingLot --> ParkingController : parkingReport
+
+ParkingController --> ParkingUI : displayParkingStatus()
+
+ParkingUI --> SystemAdministrator : showDashboard()
+@enduml

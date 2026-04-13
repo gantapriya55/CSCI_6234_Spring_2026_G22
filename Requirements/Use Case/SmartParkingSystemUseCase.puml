@@ -1,0 +1,87 @@
+@startuml
+skinparam actorStyle stickman
+left to right direction
+
+package "Smart Parking System" {
+    usecase "Park Vehicle" as UC1
+    usecase "Register Vehicle" as UC2
+    usecase "Exit Vehicle" as UC3
+    usecase "Pay Parking Fee" as UC4
+    usecase "Monitor Parking Lot" as UC5
+    usecase "Manage Parking Configuration" as UC6
+}
+
+actor "Parking User" as User
+actor "System Administrator" as Admin
+
+' This is the Secondary Actor '
+actor "Payment Gateway" as Bank <<Secondary>>
+
+' Use solid lines without arrows for Actor associations '
+User -- UC1
+User -- UC3
+
+Admin -- UC5
+Admin -- UC6
+
+' Included use cases use dashed arrows '
+UC1 ..> UC2 : <<include>>
+UC3 ..> UC4 : <<include>>
+
+' Association with the Secondary Actor '
+UC4 -- Bank
+
+note right of User
+The Parking User represents any individual who uses the smart parking system 
+to park and retrieve a vehicle. This actor interacts with the system to 
+register vehicle details, park in an available slot, and pay fees.
+end note
+
+note right of Admin
+The System Administrator is responsible for overseeing the overall 
+operation of the system. This actor monitors parking lot status, 
+manages parking rules, and ensures the system operates accurately.
+end note
+
+note right of Bank
+The Payment Gateway is a secondary actor representing the external 
+financial service that processes credit card or digital wallet 
+transactions to authorize parking fee payments.
+end note
+
+note top of UC1
+This use case allows a user to park a vehicle. The system verifies 
+registration details and assigns an available slot, updating 
+the occupancy status in real-time.
+end note
+
+note top of UC2
+This use case handles the entry of vehicle information such as 
+license plate and vehicle type. Registration is a mandatory 
+prerequisite before a vehicle is assigned a spot.
+end note
+
+note bottom of UC3
+This use case enables the user to leave the lot. The system 
+verifies that all fees are settled before releasing the 
+vehicle and marking the slot as available.
+end note
+
+note bottom of UC4
+This use case handles the financial transaction. It calculates 
+the fee based on duration and communicates with the 
+Payment Gateway to finalize the charge.
+end note
+
+note top of UC5
+This use case allows the administrator to view the live status 
+of the parking lot, including total occupancy, available spaces, 
+and any system alerts.
+end note
+
+note bottom of UC6
+This use case enables the administrator to set parking rates, 
+define time limits, and adjust system-wide parameters to 
+optimize lot performance.
+end note
+@enduml

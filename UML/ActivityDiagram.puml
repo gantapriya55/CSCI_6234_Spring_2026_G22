@@ -1,0 +1,27 @@
+@startuml
+start
+
+:Driver enters parking;
+:Input vehicle details;
+
+if (Slot available?) then (Yes)
+  :Select appropriate floor;
+  :Allocate suitable slot;
+  :Generate ticket;
+  :Store ticket data;
+  :Vehicle parked;
+else (No)
+  :Display "Parking Full";
+  stop
+endif
+
+:Driver requests exit;
+:Retrieve ticket details;
+:Calculate parking duration;
+:Apply pricing strategy;
+:Generate fee;
+:Process payment;
+:Release parking slot;
+
+stop
+@enduml

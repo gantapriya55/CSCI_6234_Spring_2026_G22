@@ -1,0 +1,67 @@
+@startuml
+title Activity Diagram – Park Vehicle
+
+start
+
+:Request Parking;
+note right
+User selects the option
+to park the vehicle.
+end note
+
+:Verify Registration;
+note right
+System checks if the vehicle
+is registered in the system.
+end note
+
+if (Vehicle Registered?) then (Yes)
+
+  :Find Available Slot;
+  note right
+  System searches for an
+  available parking slot.
+  end note
+
+  if (Slot Available?) then (Yes)
+
+    :Mark Slot as Occupied;
+    note right
+    System updates the slot
+    status to occupied.
+    end note
+
+    :Create Parking Ticket;
+    note right
+    System generates a parking
+    ticket for the vehicle.
+    end note
+
+    :Show Parking Confirmation;
+    note right
+    System confirms successful
+    parking to the user.
+    end note
+
+  else (No)
+
+    :Display No Slot Available;
+    note right
+    System informs user that
+    no parking slots are available.
+    end note
+
+  endif
+
+else (No)
+
+  :Prompt Registration;
+  note right
+  System asks user to register
+  the vehicle first.
+  end note
+
+endif
+
+stop
+@enduml

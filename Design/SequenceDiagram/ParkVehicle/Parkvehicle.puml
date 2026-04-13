@@ -1,0 +1,21 @@
+@startuml
+title Sequence Diagram – Park Vehicle
+
+actor ParkingUser
+boundary ParkingUI
+control ParkingController
+entity ParkingLot
+entity ParkingSlot
+entity Ticket
+
+ParkingUser -> ParkingUI : requestParking()
+ParkingUI -> ParkingController : parkVehicle()
+
+ParkingController -> ParkingLot : findAvailableSlot()
+ParkingLot -> ParkingSlot : allocateSlot()
+
+ParkingController -> Ticket : generateTicket()
+
+ParkingUI <-- ParkingController : parkingSuccess()
+ParkingUser <-- ParkingUI : displayTicket()
+@enduml

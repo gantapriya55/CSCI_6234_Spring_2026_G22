@@ -1,0 +1,38 @@
+@startuml
+actor Driver
+participant "User Interface" as UI
+participant ParkingLot
+participant Floor
+participant ParkingSlot
+participant Ticket
+participant PricingStrategy
+
+== Vehicle Entry ==
+
+Driver -> UI : Enter vehicle details
+UI -> ParkingLot : parkVehicle(vehicle)
+
+ParkingLot -> Floor : findFreeSlot(vehicleType)
+Floor -> ParkingSlot : checkAvailability()
+ParkingSlot --> Floor : slotAvailable
+Floor --> ParkingLot : slotAssigned
+
+ParkingLot -> Ticket : createTicket(vehicle, slot)
+Ticket --> ParkingLot : ticketDetails
+ParkingLot --> UI : displayTicket(ticket)
+UI --> Driver : Show Ticket ID
+
+== Vehicle Exit ==
+
+Driver -> UI : Request exit(ticketId)
+UI -> ParkingLot : exitVehicle(ticketId)
+
+ParkingLot -> Ticket : closeTicket()
+Ticket -> PricingStrategy : calculateFee(duration, vehicleType)
+PricingStrategy --> Ticket : feeAmount
+
+ParkingLot -> ParkingSlot : releaseSlot()
+ParkingLot --> UI : displayFee(fee)
+UI --> Driver : Payment & Exit Confirmation
+
+@enduml

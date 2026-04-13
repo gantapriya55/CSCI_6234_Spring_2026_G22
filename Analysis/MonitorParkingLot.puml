@@ -1,0 +1,17 @@
+@startuml
+title sd robustness_diagram_monitor_parking_lot
+skinparam linetype ortho
+
+actor "System Administrator" as Admin
+
+boundary "Parking UI" as UI
+control "ParkingController" as PC
+control "SlotController" as SC
+entity "ParkingSlot" as PS
+
+Admin --> UI : view lot status
+UI --> PC : request data
+PC --> SC : retrieve slot info
+SC --> PS : read occupancy
+UI <-- PC : display dashboard
+@enduml

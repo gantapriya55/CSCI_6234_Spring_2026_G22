@@ -1,0 +1,27 @@
+@startuml
+title sd robustness_diagram_park_vehicle
+skinparam linetype ortho
+
+actor "Parking User" as User
+
+boundary "Parking UI" as UI
+control "ParkingController" as PC
+entity "ParkingSlot" as PS
+entity "Ticket" as T
+
+User -> UI : request parking
+UI -> PC : process request
+activate PC
+
+PC -> PS : find available slot
+activate PS
+PS --> PC : slot details
+deactivate PS
+
+PC -> PS : mark slot as occupied
+
+PC -> T : create ticket
+
+PC --> UI : show parking confirmation
+deactivate PC
+@enduml

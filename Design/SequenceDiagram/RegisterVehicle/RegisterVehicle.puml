@@ -1,0 +1,19 @@
+@startuml
+title Sequence Diagram – Register Vehicle
+
+actor ParkingUser
+boundary ParkingUI
+control ParkingController
+entity Vehicle
+
+ParkingUser -> ParkingUI : enterVehicleDetails()
+ParkingUI -> ParkingController : registerVehicle(details)
+
+ParkingController -> Vehicle : createVehicle(details)
+Vehicle -> Vehicle : saveVehicle()
+
+Vehicle --> ParkingController : vehicleCreated
+ParkingController --> ParkingUI : registrationSuccess()
+ParkingUI --> ParkingUser : displayConfirmation()
+
+@enduml

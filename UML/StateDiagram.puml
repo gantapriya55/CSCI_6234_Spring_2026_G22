@@ -1,0 +1,8 @@
+@startuml
+[*] --> Free
+
+Free --> Reserved : Slot selected
+Reserved --> Occupied : Vehicle parked
+Occupied --> Free : Vehicle exits
+
+@enduml

@@ -1,0 +1,24 @@
+@startuml
+object Driver
+object ParkingLot
+object Floor
+object ParkingSlot
+object Ticket
+object PricingStrategy
+object AnalyticsEngine
+
+Driver -> ParkingLot : requestParking(vehicle)
+ParkingLot -> Floor : findFreeSlot(vehicleType)
+Floor -> ParkingSlot : checkAvailability()
+ParkingSlot --> Floor : slotAvailable()
+Floor --> ParkingLot : returnSlot()
+ParkingLot -> Ticket : createTicket(vehicle, slot)
+Ticket --> Driver : ticketDetails()
+
+Driver -> ParkingLot : requestExit(ticketId)
+ParkingLot -> Ticket : closeTicket()
+Ticket -> PricingStrategy : calculateFee(duration, type)
+ParkingLot -> ParkingSlot : releaseSlot()
+ParkingLot -> AnalyticsEngine : updateStatistics()
+ParkingLot --> Driver : feeDetails()
+@enduml

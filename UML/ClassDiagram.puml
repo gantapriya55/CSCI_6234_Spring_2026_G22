@@ -1,0 +1,86 @@
+@startuml
+
+abstract class Vehicle {
+  -plateNo : String
+  -entryTime : DateTime
+  +getType() : String
+}
+
+class Car
+class Bike
+class ElectricCar
+
+Vehicle <|-- Car
+Vehicle <|-- Bike
+Vehicle <|-- ElectricCar
+
+
+abstract class ParkingSlot {
+  -slotId : String
+  -status : Boolean
+  -vehicle : Vehicle
+  +isFree() : Boolean
+  +assignVehicle(v:Vehicle)
+  +removeVehicle()
+  +allowedType() : String
+}
+
+class CarSlot
+class BikeSlot
+class EVSlot
+
+ParkingSlot <|-- CarSlot
+ParkingSlot <|-- BikeSlot
+ParkingSlot <|-- EVSlot
+
+
+class Floor {
+  -floorNo : int
+  -slots : List<ParkingSlot>
+  +addSlot(slot:ParkingSlot)
+  +findFreeSlot(type:String) : ParkingSlot
+}
+
+
+class Ticket {
+  -ticketId : String
+  -entryTime : DateTime
+  -exitTime : DateTime
+  -fee : double
+  +closeTicket(strategy:PricingStrategy)
+}
+
+
+interface PricingStrategy {
+  +calculateFee(duration:double, type:String) : double
+}
+
+class StandardPricing
+class PeakHourPricing
+
+PricingStrategy <|.. StandardPricing
+PricingStrategy <|.. PeakHourPricing
+
+
+class AnalyticsEngine {
+  +updateStatistics()
+  +generateReport()
+}
+
+
+class ParkingLot {
+  -floors : List<Floor>
+  -tickets : Map<String, Ticket>
+  -pricingStrategy : PricingStrategy
+  +parkVehicle(v:Vehicle) : Ticket
+  +exitVehicle(ticketId:String) : Ticket
+  +setPricingStrategy(strategy:PricingStrategy)
+}
+
+ParkingLot o-- Floor
+Floor o-- ParkingSlot
+ParkingLot o-- Ticket
+ParkingLot --> PricingStrategy
+ParkingLot --> AnalyticsEngine
+
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+
+package "Smart Parking System" {
+
+  [User Interface] --> [Parking Controller]
+
+  [Parking Controller] --> [Vehicle Management Module]
+  [Parking Controller] --> [Slot Management Module]
+  [Parking Controller] --> [Ticket Management Module]
+  [Parking Controller] --> [Pricing Module]
+  [Parking Controller] --> [Analytics Module]
+
+  [Pricing Module] --> [PricingStrategy]
+}
+
+@enduml

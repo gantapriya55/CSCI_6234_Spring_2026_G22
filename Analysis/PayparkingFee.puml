@@ -1,0 +1,45 @@
+
+@startuml
+title sd_robustness_diagram_pay_parking_fee
+skinparam linetype ortho
+
+actor "Parking User" as User
+actor "Payment Gateway" as PG
+
+boundary "Parking UI" as UI
+control "TicketController" as TC
+entity "Ticket" as T
+entity "PricingPolicy" as PP
+
+' User initiates payment
+User -> UI : pay parking fee
+UI -> TC : process payment
+activate TC
+
+' Controller retrieves ticket details
+TC -> T : get ticket details
+activate T
+T --> TC : ticket details
+deactivate T
+
+' Pass retrieved details to PricingPolicy
+TC -> PP : calculate fee 
+activate PP
+PP --> TC : fee amount
+deactivate PP
+
+' Authorize payment
+TC -> PG : authorize payment 
+activate PG
+PG --> TC : payment result
+deactivate PG
+
+' Update ticket and confirm to user
+TC -> T : update payment status
+activate T
+T --> TC : update confirmation
+deactivate T
+
+TC --> UI : show payment confirmation
+deactivate TC
+@enduml

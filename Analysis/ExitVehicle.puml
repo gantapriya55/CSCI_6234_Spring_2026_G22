@@ -1,0 +1,16 @@
+@startuml
+title sd robustness_diagram_exit_vehicle
+skinparam linetype ortho
+
+actor "Parking User" as User
+
+boundary "Parking UI" as UI
+control "ParkingController" as PC
+entity "Ticket" as T
+entity "ParkingSlot" as PS
+
+User --> UI : request exit
+UI --> PC : process exit
+PC --> T : check payment status
+PC --> PS : set available
+@enduml

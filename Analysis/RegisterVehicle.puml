@@ -1,0 +1,15 @@
+@startuml
+title sd robustness_diagram_register_vehicle
+skinparam linetype ortho
+
+actor "Parking User" as User
+
+boundary "Parking UI" as UI
+control "ParkingController" as PC
+entity "Ticket" as T
+
+User --> UI : fill vehicle details
+UI --> PC : submit details
+PC --> T : save vehicle info
+UI <-- PC : display success
+@enduml

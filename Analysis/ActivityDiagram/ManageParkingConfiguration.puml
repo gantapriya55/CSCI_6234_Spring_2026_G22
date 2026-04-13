@@ -1,0 +1,43 @@
+@startuml
+title Activity Diagram – Manage Parking Configuration
+
+start
+
+:Open Configuration Settings;
+note right
+Administrator accesses the
+parking configuration panel.
+end note
+
+:Modify Configuration Details;
+note right
+Administrator updates slot limits,
+slot policies, and pricing settings.
+end note
+
+:Submit Configuration Changes;
+note right
+Administrator submits the
+updated configuration.
+end note
+
+:Update Slot Rules;
+note right
+System updates parking slot
+rules in the database.
+end note
+
+:Update Pricing Policy;
+note right
+System updates parking rate
+structure and pricing rules.
+end note
+
+:Display Update Confirmation;
+note right
+System confirms successful
+configuration update to administrator.
+end note
+
+stop
+@enduml
