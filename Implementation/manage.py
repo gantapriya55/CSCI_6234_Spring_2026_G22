@@ -22,6 +22,3 @@ if __name__ == '__main__':
     main()
 
     
-# cd "C:\Users\nikhi\Downloads\smart_parking (1)\smart_parking"
-# python manage.py runserver
-# http://127.0.0.1:8000/admin
