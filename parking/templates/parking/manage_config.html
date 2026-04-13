@@ -1,0 +1,54 @@
+{% extends "parking/base.html" %}
+{% block title %}Configuration{% endblock %}
+{% block content %}
+<h4 class="mb-4"><i class="bi bi-gear me-2"></i>Manage Configuration</h4>
+<div class="row g-4">
+  <div class="col-md-6">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-white fw-bold">Add Parking Lot</div>
+      <div class="card-body">
+        <form method="post">{% csrf_token %}<input type="hidden" name="action" value="add_lot">
+          <div class="mb-2"><label class="form-label">Lot Name</label><input name="lot_name" class="form-control" required value="Main Parking"></div>
+          <div class="mb-2"><label class="form-label">Floors</label><input name="floors_count" type="number" class="form-control" value="3" min="1"></div>
+          <div class="row g-2 mb-2">
+            <div class="col"><label class="form-label small">Bike slots/floor</label><input name="small_per_floor" type="number" class="form-control" value="5"></div>
+            <div class="col"><label class="form-label small">Car slots/floor</label><input name="medium_per_floor" type="number" class="form-control" value="10"></div>
+          </div>
+          <div class="row g-2 mb-3">
+            <div class="col"><label class="form-label small">Truck slots/floor</label><input name="large_per_floor" type="number" class="form-control" value="3"></div>
+            <div class="col"><label class="form-label small">EV slots/floor</label><input name="ev_per_floor" type="number" class="form-control" value="2"></div>
+          </div>
+          <button class="btn btn-primary w-100">Create Lot</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card border-0 shadow-sm">
+      <div class="card-header bg-white fw-bold">Dynamic Pricing ($/hr)</div>
+      <div class="card-body">
+        <form method="post">{% csrf_token %}<input type="hidden" name="action" value="update_pricing">
+          {% for val, label in vehicle_types %}
+          <div class="row g-2 mb-2 align-items-center">
+            <div class="col-4"><label class="form-label mb-0">{{ label }}</label></div>
+            <div class="col-4"><input name="rate_{{ val }}" type="number" step="0.01" class="form-control form-control-sm" placeholder="Rate" value="{% for p in pricing %}{% if p.vehicle_type == val %}{{ p.base_rate_per_hour }}{% endif %}{% endfor %}"></div>
+            <div class="col-4"><input name="ev_surcharge_{{ val }}" type="number" step="0.01" class="form-control form-control-sm" placeholder="EV extra" value="{% for p in pricing %}{% if p.vehicle_type == val %}{{ p.ev_surcharge }}{% endif %}{% endfor %}"></div>
+          </div>
+          {% endfor %}
+          <button class="btn btn-outline-primary w-100 mt-2">Save Pricing</button>
+        </form>
+      </div>
+    </div>
+    {% if lots %}
+    <div class="card border-0 shadow-sm mt-3">
+      <div class="card-header bg-white fw-bold">Existing Lots</div>
+      <div class="card-body p-0">
+        <table class="table mb-0"><thead><tr><th>Name</th><th>Capacity</th><th>Occupancy</th></tr></thead><tbody>
+        {% for lot in lots %}<tr><td>{{ lot.name }}</td><td>{{ lot.total_capacity }}</td><td>{{ lot.occupancy_percent }}%</td></tr>{% endfor %}
+        </tbody></table>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
